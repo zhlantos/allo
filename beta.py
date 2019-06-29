@@ -585,7 +585,7 @@ def pilih_super():
                     id.append(i['id'])
 
             else:
-				if peak == '2':
+				if peak == '3':
 					os.system('reset')
 					print logo
 					idt = raw_input('\x1b[1;91m[+] \x1b[1;92mInput ID friend \x1b[1;91m: \x1b[1;97m')
