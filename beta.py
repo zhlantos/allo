@@ -545,7 +545,7 @@ def super():
     print '\x1b[1;37;40m2. Crack dari member Grup'
     print '\x1b[1;31;40m0. Kembali'
     print
-	print
+print
     pilih_super()
 
 
