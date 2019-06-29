@@ -146,7 +146,6 @@ def menu():
     print logo
     print '\x1b[1;97m\xe2\x95\x94' + 40 * '\xe2\x95\x90'
     print '\xe2\x95\x91\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m]\x1b[1;97m Nama \x1b[1;91m: \x1b[1;92m' + nama
-	print '\xe2\x95\x91\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m]\x1b[1;97m FBID \x1b[1;91m: \x1b[1;92m' + id
     print '\x1b[1;97m\xe2\x95\x9a' + 40 * '\xe2\x95\x90'
     print '\x1b[1;37;40m1. Cek Info FB Orang Lain'
     print '\x1b[1;37;40m2. Hack Akun Facebook'
@@ -155,6 +154,7 @@ def menu():
     print '\x1b[1;37;40m5. LogOut Facebook   '
     print '\x1b[1;37;40m6. Lihat Token FB    '
     print '\x1b[1;31;40m0. Keluar Program    '
+	print '\x1b[1;31;40m0.        '
     pilih()
 
 
