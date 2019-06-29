@@ -543,10 +543,9 @@ def super():
     print 40 * '\x1b[1;97m\xe2\x95\x90'
     print '\x1b[1;37;40m1. Crack dari daftar Teman'
     print '\x1b[1;37;40m2. Crack dari member Grup'
-    print 
-    print
-	print '\x1b[1;31;40m0. Kembali'
-	pilih_super()
+    print '\x1b[1;37;40m2. Crack dari teman dari teman'
+    print '\x1b[1;31;40m0. Kembali'
+    pilih_super()
 
 
 def pilih_super():
