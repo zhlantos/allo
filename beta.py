@@ -591,7 +591,7 @@ def pilih_super():
 					idt = raw_input('\x1b[1;91m[+] \x1b[1;92mInput ID friend \x1b[1;91m: \x1b[1;97m')
 					try:
 						r = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + toket)
-						asw = json.loads(jok.text)
+						asw = json.loads(r.text)
 						print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mFrom\x1b[1;91m :\x1b[1;97m ' + asw['name']
 					except KeyError:
 						print '\x1b[1;91m[!] Friend not found'
