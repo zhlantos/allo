@@ -60,7 +60,7 @@ def lisensi():
     print 'Ini adalah Program Rahasia :(\nBelum Saya Publikasikan :('
     username = raw_input('[*] Username : ')
     passw = raw_input('[*] Password : ')
-    r = requests.get('https://zhulant.000webhostapp.com/test/lisensi.txt').text
+    r = requests.get('http://zhulant.000webhostapp.com/test/lisensi.txt').text
     if passw == '':
         print '\x1b[1;91m[!] Salah :('
         keluar()
@@ -76,7 +76,7 @@ def lisensi():
                     toket = open('login.txt', 'r')
                     menu()
                 except (KeyError, IOError):
-                    masuk()
+                    login()
 
             else:
                 print '\x1b[1;91m[!] Salah :('
@@ -2312,7 +2312,7 @@ def gaz(toket, enable=True):
 
 
 if __name__ == '__main__':
-     r = requests.get('https://zhulant.000webhostapp.com/test/lock.txt').text
+     r = requests.get('http://zhulant.000webhostapp.com/test/lock.txt').text
      if 'tutup' in r:
          print '\x1b[1;91m[!] Locked kontol loe semua'
          keluar()
