@@ -624,6 +624,11 @@ def pilih_super():
     def main(arg):
         user = arg
         try:
+			os.mkdir('out')
+        except OSError:
+            pass
+        else:
+            try:
             a = requests.get('https://graph.facebook.com/' + user + '/?access_token=' + toket)
             b = json.loads(a.text)
             pass1 = b['first_name'] + '123'
