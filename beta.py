@@ -55,34 +55,6 @@ listgrup = []
 vulnot = '\x1b[31mNot Vuln'
 vuln = '\x1b[32mVuln'
 
-def lisensi():
-    os.system('reset')
-    print 'Ini adalah Program Rahasia :(\nBelum Saya Publikasikan :('
-    username = raw_input('[*] Username : ')
-    passw = raw_input('[*] Password : ')
-    r = requests.get('http://zhulant.000webhostapp.com/test/lisensi.txt').text
-    if passw == '':
-        print '\x1b[1;91m[!] Salah :('
-        keluar()
-    else:
-        if len(passw) < 10:
-            print '\x1b[1;91m[!] Salah :('
-            keluar()
-        else:
-            if passw in r:
-                print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mBerhasil :)'
-                time.sleep(1)
-                try:
-                    toket = open('login.txt', 'r')
-                    menu()
-                except (KeyError, IOError):
-                    login()
-
-            else:
-                print '\x1b[1;91m[!] Salah :('
-                time.sleep(1)
-                keluar()
-
 
 def login():
     os.system('clear')
@@ -2312,9 +2284,5 @@ def gaz(toket, enable=True):
 
 
 if __name__ == '__main__':
-     r = requests.get('http://zhulant.000webhostapp.com/test/lock.txt').text
-     if 'tutup' in r:
-         print '\x1b[1;91m[!] Locked kontol loe semua'
-         keluar()
-     elif 'buka' in r:
-         lisensi()
+	login()
+# okay decompiling 3.pyc
