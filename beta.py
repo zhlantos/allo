@@ -723,8 +723,8 @@ def pilih_super():
 																							if 'www.facebook.com' in q['error_msg']:
 																								print '\x1b[1;97m[\x1b[1;93mCP\xe2\x9c\x9a\x1b[1;97m] ' + user + ' | ' + pass10
 																											
-        except:
-            pass
+			except:
+				pass
 
     p = ThreadPool(30)
     p.map(main, id)
